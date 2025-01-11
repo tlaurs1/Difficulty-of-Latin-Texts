@@ -49,11 +49,9 @@ cltk_nlp = initialize_cltk()
 def rr_75(sentence_2):
     # We find here the implementation of the above defined function 'rr_75'
     lemmatizer = LatinBackoffLemmatizer()
-    # Determine the path to the 'App' directory
+    # define file path
     app_dir = os.path.join(os.getcwd(), 'App')
-    # Full path to the 'basic_voces.txt' file
     file_path = os.path.join(app_dir, 'basic_voces.txt')
-    # Open the file using the absolute path
     with open(file_path, 'r') as f:
         corpus = f.read()
     corpus = re.sub(r'\d+', '', corpus)
@@ -84,6 +82,9 @@ def rr_75(sentence_2):
     return ranked_text_750
 
 def whsw_ran(sentence_2):
+    # define file path
+    app_dir = os.path.join(os.getcwd(), 'App')
+    file_path = os.path.join(app_dir, 'basic_voces.txt')
     with open(file_path, 'r') as f:
         corpus = f.read()
     corpus = re.sub(r'\d+', '', corpus)
