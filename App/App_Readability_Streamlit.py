@@ -3,11 +3,15 @@ from cltk.lemmatize.lat import LatinBackoffLemmatizer
 from cltk.stops.words import Stops
 from cltk.wordnet.wordnet import WordNetCorpusReader
 from cltk.core.exceptions import CLTKException
+from cltk import NLP
 import stanza
 import string
 import re
 import os
 from collections import Counter
+
+# Programmatically approve CLTK downloads
+os.environ["CLTK_DATA_DOWNLOAD"] = "true"  # Bypass download confirmation prompts
 
 @st.cache_resource
 def initialize_stanza():
@@ -19,6 +23,15 @@ def initialize_stanza():
     return nlp
 # Use the function to initialize the model
 nlp = initialize_stanza()
+
+@st.cache_resource
+def initialize_cltk():
+    """Initialize the CLTK pipeline for Latin."""
+    cltk_nlp = NLP(language="lat")
+    return cltk_nlp
+# Use the function to initialize CLTK
+cltk_nlp = initialize_cltk()
+
 
 def rr_75(sentence_2):
     # We find here the implementation of the above defined function 'rr_75'
