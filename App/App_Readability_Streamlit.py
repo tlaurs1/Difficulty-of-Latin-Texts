@@ -11,9 +11,6 @@ import re
 import os
 from collections import Counter
 
-st.write("Working Directory:", os.getcwd())
-st.write("Files in Directory:", os.listdir())
-
 # Programmatically approve CLTK downloads
 os.environ["CLTK_DATA_DOWNLOAD"] = "true"  # Bypass download confirmation prompts
 
@@ -52,7 +49,12 @@ cltk_nlp = initialize_cltk()
 def rr_75(sentence_2):
     # We find here the implementation of the above defined function 'rr_75'
     lemmatizer = LatinBackoffLemmatizer()
-    with open('basic_voces.txt', 'r') as f:
+    # Determine the path to the 'App' directory
+    app_dir = os.path.join(os.getcwd(), 'App')
+    # Full path to the 'basic_voces.txt' file
+    file_path = os.path.join(app_dir, 'basic_voces.txt')
+    # Open the file using the absolute path
+    with open(file_path, 'r') as f:
         corpus = f.read()
     corpus = re.sub(r'\d+', '', corpus)
     corpus = corpus.translate(str.maketrans('', '', string.punctuation))
@@ -82,7 +84,7 @@ def rr_75(sentence_2):
     return ranked_text_750
 
 def whsw_ran(sentence_2):
-    with open('basic_voces.txt', 'r') as f:
+    with open(file_path, 'r') as f:
         corpus = f.read()
     corpus = re.sub(r'\d+', '', corpus)
     corpus = corpus.translate(str.maketrans('', '', string.punctuation))
