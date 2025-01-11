@@ -3,6 +3,7 @@ from cltk.lemmatize.lat import LatinBackoffLemmatizer
 from cltk.stops.words import Stops
 from cltk.wordnet.wordnet import WordNetCorpusReader
 from cltk.core.exceptions import CLTKException
+from cltk.data.fetch import FetchCorpus
 from cltk import NLP
 import stanza
 import string
@@ -23,6 +24,18 @@ def initialize_stanza():
     return nlp
 # Use the function to initialize the model
 nlp = initialize_stanza()
+
+@st.cache_resource
+def ensure_cltk_models():
+    """Ensure the required CLTK models are downloaded."""
+    cltk_data_path = os.path.expanduser("~/cltk_data")  # Default CLTK data path
+    if not os.path.exists(os.path.join(cltk_data_path, "lat/model/lat_models_cltk")):
+        st.write("Downloading required CLTK models, please wait...")
+        fetch_corpus = FetchCorpus(language="lat")
+        fetch_corpus.import_corpus("lat_models_cltk")
+        st.write("CLTK models downloaded successfully.")
+
+ensure_cltk_models()
 
 @st.cache_resource
 def initialize_cltk():
