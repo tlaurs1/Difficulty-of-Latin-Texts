@@ -11,6 +11,9 @@ import re
 import os
 from collections import Counter
 
+st.write("Working Directory:", os.getcwd())
+st.write("Files in Directory:", os.listdir())
+
 # Programmatically approve CLTK downloads
 os.environ["CLTK_DATA_DOWNLOAD"] = "true"  # Bypass download confirmation prompts
 
